@@ -16,11 +16,16 @@
         @vite('resources/css/app.css')
     </head>
     <body>
-        <div id="app">
-            <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0" style="font-family: 'Nunito', sans-serif;" class="antialiased">
-                @yield('body')
+        @hasSection('bodyRaw')
+            @yield('bodyRaw')
+        @endif
+        @hasSection('body')
+            <div id="app">
+                <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0" style="font-family: 'Nunito', sans-serif;" class="antialiased">
+                    @yield('body')
+                </div>
             </div>
-        </div>
+        @endif
         @vite('resources/js/app.js')
     </body>
 </html>
