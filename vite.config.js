@@ -3,12 +3,20 @@ import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
-    plugins: [
-        laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
-            refresh: true,
-						// dev_url: "http://127.0.0.1:8000"
-        }),
-        vue(),
-    ],
+  plugins: [
+    vue(),
+    laravel({
+        input: ['resources/css/app.css', 'resources/js/app.js'],
+        refresh: true,
+    }),
+  ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+          @import "./resources/css/scss/libs/colors.scss";
+        `
+      }
+    },
+  },
 });
