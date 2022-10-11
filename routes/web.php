@@ -13,9 +13,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::redirect('/', '/dev/welcome');
+
+Route::group(['prefix'=>'layout', 'name'=>'layout'], function(){
+    Route::get('vue', function () {
+        return view('layouts.vue');
+    })->name('vue');
+    Route::get('web', function () {
+        return view('layouts.web');
+    })->name('web');
+});
+
+Route::group(['prefix'=>'dev', 'name'=>'dev'], function(){
+    Route::get('welcome', function () {
+        return view('dev/welcome');
+    })->name('welcome');
+    Route::get('debug', function () {
+        return view('dev/debug');
+    })->name('debug');
+});
+
 Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/debug', function () {
-    return view('debug');
-});
+    return view('vue');
+})->name('vue');
