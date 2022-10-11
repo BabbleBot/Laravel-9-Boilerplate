@@ -2,6 +2,7 @@
     "private": true,
     "scripts": {
         "dev": "vite",
+        "dev https": "vite --https",
         "build": "vite build"
     },
     "devDependencies": {
@@ -11,8 +12,8 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
-        "axios": "^0.27",
         "@vitejs/plugin-vue": "^3.0.3",
+        "axios": "^0.27",
         "unplugin-vue-components": "^0.22.4",
         "vue": "^3.2.36",
         "vue-loader": "^17.0.0"
