@@ -24,7 +24,7 @@
 import {createApp} from 'vue/dist/vue.esm-bundler';
 
 const componentFiles = import.meta.globEager(
-  '../components/**/*.vue'
+  './components/**/*.vue'
 );
 
 var app = createApp({
@@ -32,9 +32,9 @@ var app = createApp({
 })
 
 Object.entries(componentFiles).forEach(([path, m]) => {
-  const componentName = _.upperFirst(
-    _.camelCase(path.split('/').pop().replace(/\.vue$/, ''))
-  );
+  // Register js/component/atoms/foo-bar.vue as AtomFooBar
+  const componentName = _.upperFirst(_.camelCase(path.replace(/\//, '-').replace(/\.vue$/, '')));
+
   app.component(
     `${componentName}`, m.default
   );
