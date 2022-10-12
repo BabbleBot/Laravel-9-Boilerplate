@@ -32,8 +32,33 @@ var app = createApp({
 })
 
 Object.entries(componentFiles).forEach(([path, m]) => {
-  // Register js/component/atoms/foo-bar.vue as AtomFooBar
-  const componentName = _.upperFirst(_.camelCase(path.replace(/\//, '-').replace(/\.vue$/, '')));
+  let componentName, componentNameArray = path.split(/\.vue$/);
+
+  componentNameArray = componentNameArray.shift().split(/\//);
+
+  switch(componentNameArray[2]){
+    case 'atoms':
+      componentName = '';
+    break;
+    case 'molecules':
+      componentName = 'app';
+    break;
+    case 'organisms':
+      componentName = 'app';
+    break;
+    case 'templates':
+      componentName = 'app';
+    break;
+    case 'views':
+      componentName = 'view';
+    break;
+  };
+
+  componentName += (componentName ? '-' : '') + componentNameArray.slice(3).join('-').toLowerCase();
+
+  // console.log(path);
+  // console.log(componentNameArray);
+  // console.log(componentName);
 
   app.component(
     `${componentName}`, m.default
