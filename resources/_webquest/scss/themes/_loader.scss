@@ -1,0 +1,35 @@
+@import 'light.scss';
+@import 'dark.scss';
+@import 'smaug.scss';
+
+$themes: (
+  light: $theme-light,
+  dark: $theme-dark,
+  // smaug: $theme-smaug,
+  smaug: (
+    'font-navbar': 'Inknut Antiqua, serif',
+
+    'colorLight': #CBCBCB,
+    'colorDark': #000000,
+    'colorDominant': #FEBB1D,
+    'colorAccent1': #F36303,
+    'colorAccent2': #BE1E00,
+    'colorContrast': #025FB2,
+
+    'colorTextEmphaseLight': #020202,
+    'colorTextLight': #CBCBCB,
+    'colorTextDark': #000000,
+
+    'navbarBackgroundImage': url('img/smaug/bg-navbar.jpg'),
+    'navbarBackgroundEmphase': rgba(0,0,0,0.7),
+    'navbarLogo': url('img/smaug/logo.png'),
+  )
+);
+
+@each $name, $map in $themes {
+  [data-theme=#{$name}] {
+      @each $key, $value in $map {
+          --#{$key}: #{$value};
+      }
+  }
+}

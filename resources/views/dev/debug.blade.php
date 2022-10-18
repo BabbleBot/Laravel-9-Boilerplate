@@ -1,7 +1,9 @@
-@extends("layouts._")
+@extends("_base")
 
-@section('bodyRaw')
-  @php
-    phpinfo()
-  @endphp
+@section('body')
+  <body>
+    @php
+      phpinfo()
+    @endphp
+  </body>
 @endsection

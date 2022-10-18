@@ -13,26 +13,46 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', '/dev/welcome');
 
-Route::group(['prefix'=>'layout', 'name'=>'layout'], function(){
-    Route::get('vue', function () {
-        return view('layouts.vue');
-    })->name('vue');
-    Route::get('web', function () {
-        return view('layouts.web');
-    })->name('web');
+// Route::group([
+    //     'prefix'=>'layout',
+    //     'name'=>'layout',
+// ], function(){
+    //     Route::get('vue', function () {
+        //         return view('layouts.vue');
+        //     })->name('vue');
+        //     Route::get('web', function () {
+            //         return view('layouts.web');
+//     })->name('web');
+// });
+
+Route::redirect('/cv', '/CV');
+Route::group([
+  'domain'=>'www.' . env('APP_URL'),
+  'name'=>'www'
+], function(){
+  Route::get('/', function () {
+    return view('welcome');
+  });
+  route::get('/CV', function(){
+    return view('portfolio/cv');
+  });
 });
 
-Route::group(['prefix'=>'dev', 'name'=>'dev'], function(){
-    Route::get('welcome', function () {
-        return view('dev/welcome');
-    })->name('welcome');
-    Route::get('debug', function () {
-        return view('dev/debug');
-    })->name('debug');
+Route::group([
+  'domain'=>'webquest.' . env('APP_URL'),
+  'name'=>'webquest'
+], function(){
+  Route::get('/', function () {
+    return view('webquest/app');
+  });
 });
 
-Route::get('/', function () {
-    return view('vue');
-})->name('vue');
+Route::group([
+  'domain'=>'dev.' . env('APP_URL'),
+  'name'=>'dev',
+], function(){
+  Route::get('debug', function () {
+    return view('dev/debug');
+  })->name('debug');
+});
