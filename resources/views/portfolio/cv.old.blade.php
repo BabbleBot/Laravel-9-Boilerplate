@@ -14,69 +14,52 @@
 
 @section('body')
 <body>
+  <header id="header">
+    <div class="pres">
+      <img class="photo" src="/img/portfolio/photo.jpg" alt="Photo">
+      <section class="text">
+        <h1>Quentin Boulaire</h1>
+        <h2>Développeur Fullstack</h2>
+      </section>
+      <div></div>
+      <img class="qr-code" src="/img/portfolio/qr-code.png" alt="QRcode">
+    </div>
+
+    <address>
+      <a href="tel:{{str_replace(' ', '', $infos['phone'])}}">
+        <i class="fa-solid fa-phone"></i>
+        {{$infos['phone']}}
+      </a>
+      <a href="mailto:{{$infos['email']}}">
+        <i class="fa-solid fa-envelope"></i>
+        {{$infos['email']}}
+      </a>
+      <a href="http://maps.google.com/?q={{$infos['address']['main']}}" target="_blank">
+        <i class="fa-solid fa-map-marker-alt"></i>
+        {{$infos['address']['main']}}
+      </a>
+    </address>
+  </header>
+
   <main>
     <aside>
-      <header>
-        <h1>Quentin<br>Boulaire</h1>
-        <h2>Développeur Fullstack</h2>
-        <img class="photo" src="/img/portfolio/photo.jpg" alt="Photo">
-        {{-- <section class="text">
-        </section> --}}
-        {{-- <div></div> --}}
-        {{-- <img class="qr-code" src="/img/portfolio/qr-code.png" alt="QRcode"> --}}
-      </header>
-
-      <section>
-        <h3>Informations Personnelles</h3>
-        <address class="container">
-          <a href="http://maps.google.com/?q={{$infos['address']['main']}}" target="_blank">
-            <h4>{{-- <i class="fa-solid fa-map-marker-alt"></i> --}} Adresse</h4>
-            <p>{{$infos['address']['main']}}</p>
-          </a>
-          <a href="tel:{{str_replace(' ', '', $infos['phone'])}}">
-            <h4>{{-- <i class="fa-solid fa-phone"></i> --}} Téléphone</h4>
-            <p>{{$infos['phone']}}</p>
-          </a>
-          <a href="mailto:{{$infos['email']}}">
-            <h4>{{-- <i class="fa-solid fa-envelope"></i> --}} Email</h4>
-            <p>{{$infos['email']}}</p>
-          </a>
-        </address>
-      </section>
-
-      <section>
-        <h3>Web</h3>
-        @foreach($skills as $skill)
+      @foreach($skills as $skillCat)
+        <section class="skill-category">
+          <h3>{{$skillCat['categoryTitle']}}</h3>
+          @foreach($skillCat['categoryContent'] as $skill)
             <section class="skill-detail">
-              <h4 class="compact">{{$skill['title']}}</h4>
-              @foreach($skill['content'] as $line)
-                <p>{{is_array($line) ? implode(', ', $line) : $line}}</p>
-              @endforeach
-            </section>
-          @endforeach
-      </section>
-
-      <section>
-        <h3>Langues</h3>
-        @foreach($languages as $language)
-            <section class="skill-detail">
-              <h4 class="compact">{{$language['title']}}</h4>
-              <p>{{$language['content']}}</p>
-            </section>
-          @endforeach
-      </section>
-
-      {{-- <section>
-        <h3>Interests</h3>
-        @foreach($interests as $interest)
-            <section class="skill-detail">
-              <h4 class="compact">{{$interest['title']}}</h4>
-                @foreach($interest['content'] as $line)
+              <h4 class="{{is_array($skill['skillContent']) ? '' : ' compact'}}">{{$skill['skillTitle']}}</h4>
+              @if(is_array($skill['skillContent']))
+                @foreach($skill['skillContent'] as $line)
                   <p>{{is_array($line) ? implode(', ', $line) : $line}}</p>
                 @endforeach
+              @else
+                <p>{{$skill['skillContent']}}</p>
+              @endif
             </section>
           @endforeach
-      </section> --}}
+        </section>
+      @endforeach
     </aside>
     <section id="journey">
       <section class="motivation">

@@ -1,3 +1,234 @@
-*{
-  border: 2px solid red;
+$color-light: rgb(255, 255, 255);
+$color-medium: #17425e;
+$color-dark: darken($color-medium, 10%);
+$color-emphase:gold;
+
+$date-width: 90px;
+
+@mixin lightBackground {
+  background-color: $color-light;
+  color:  $color-dark;
 }
+
+@mixin darkBackground {
+  background-color: $color-medium;
+  color:  $color-light;
+}
+
+
+@media print {
+  body{
+    // width: 21cm;
+    // height: 29.7cm;
+    print-color-adjust: exact;
+  }
+  @page {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+#footer{
+  flex: 0 0 5%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  @include darkBackground;
+
+  p{
+    flex: 0 0 100%;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+
+html{
+  background-color: #646464;
+
+  body{
+    // aspect-ratio: 1.414;
+    width: 21.05cm;
+    height: 29.7cm;
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 0 auto;
+    font-family: "Gill Sans";
+    @include lightBackground;
+
+    h1{
+      font-size: 1.8rem;
+      line-height: 2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    h2{
+      font-size: 1.2rem;
+      font-weight: regular;
+      text-transform: uppercase;
+    }
+
+    h3{
+      margin-bottom: 5px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    h4{
+      font-size: 1rem;
+      font-weight: normal;
+      text-decoration: underline;
+    }
+
+    a{
+      &:hover{
+        color: $color-emphase;
+      }
+    }
+
+    main{
+      flex: 1 0;
+      display: flex;
+      flex-flow: row nowrap;
+      overflow: hidden;
+
+
+      aside{
+        flex: 0 0 30%;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: flex-start;
+        gap: 15px;
+        padding: 10px 0;
+        @include darkBackground;
+
+        > *{
+          display: flex;
+          flex-flow: column nowrap;
+          > *{
+            padding: 0 15px;
+          }
+        }
+
+        h3{
+          background-color: $color-dark;
+          padding-top: 0.4rem;
+          padding-bottom: 0.4rem;
+        }
+
+        h4{
+          text-transform: capitalize;
+
+          &::after{
+            content: ":";
+          }
+
+          &.compact{
+            display: inline-block;
+
+            & + p{
+              display: inline-block;
+            }
+          }
+
+        }
+
+        p{
+          // display: inline-block;
+          text-transform: capitalize;
+          margin: 0.1em 0;
+        }
+
+        // header{
+        //   .photo{
+        //     width: 100%;
+        //   }
+
+        //   .qr-code{
+        //     height: 100%;
+        //   }
+        // }
+
+        .skill-category{
+          .skill-detail{
+            padding: 0 15px;
+          }
+        }
+      }
+    }
+
+    #journey{
+      padding: 10px;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: start;
+
+      > * {
+        display:flex;
+        flex-flow: column nowrap;
+        gap: 15px;
+      }
+
+      h3{
+        width: 100%;
+        margin: 0.5em 0;
+        padding: 0.5em 0;
+        border-top: 1px solid darken($color-light, 10);
+        border-bottom: 1px solid darken($color-light, 10);
+      }
+
+      .experience{
+        display: flex;
+        flex-flow: column wrap;
+
+        .company{
+          *{
+            display: inline-block;
+            margin: 5px 0;
+            font-size: 0.8rem;
+          }
+
+          .name{
+            text-transform: capitalize;
+
+            &::after{
+              content: ',';
+            }
+          }
+
+        }
+        .missions{
+          *{
+            list-style: disc;
+            list-style-position: outside;
+            text-transform: capitalize;
+            margin-left: 1em
+          }
+        }
+      }
+
+      > section{
+        > section {
+          position: relative;
+          padding-left: $date-width;
+        }
+      }
+
+      .dates{
+        // float: left;
+        position: absolute;
+        top: 0; left: 0;
+        width: $date-width;
+        font-size: 0.8rem;
+        overflow: hidden;
+      }
+
+      .location{
+        text-transform: capitalize;
+        font-style: italic;
+      }
+    }
+  }
+}
+

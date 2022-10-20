@@ -26,33 +26,58 @@ use Illuminate\Support\Facades\Route;
 //     })->name('web');
 // });
 
-Route::redirect('/cv', '/CV');
+/**
+ * Subdomain: portfolio
+ * Name: portfolio.
+ */
 Route::group([
-  'domain'=>'www.' . env('APP_URL'),
-  'name'=>'www'
-], function(){
-  Route::get('/', function () {
-    return view('welcome');
-  });
-  route::get('/CV', function(){
-    return view('portfolio/cv');
-  });
-});
+    'domain' => 'portfolio.' . env('APP_URL'),
+    'as' => 'portfolio.',
+    'controller' => 'App\Http\Controllers\Portfolio\PortfolioController',
+  ], function(){
+    route::get('/cv', 'cv')->name('cv');
+    route::get('/cv/download', 'toPDF')->name('cv.download');
+  }
+);
 
+/**
+ * Subdomain: webquest
+ * Name: webquest.
+ */
 Route::group([
-  'domain'=>'webquest.' . env('APP_URL'),
-  'name'=>'webquest'
-], function(){
-  Route::get('/', function () {
-    return view('webquest/app');
-  });
-});
+    'domain'=>'webquest.' . env('APP_URL'),
+    'as'=>'webquest'
+  ], function(){
+    Route::get('/', function () {
+      return view('webquest/app');
+    })->name('app');
+  }
+);
 
+/**
+ * Subdomain: dev
+ * Name: dev.
+ */
 Route::group([
-  'domain'=>'dev.' . env('APP_URL'),
-  'name'=>'dev',
-], function(){
-  Route::get('debug', function () {
-    return view('dev/debug');
-  })->name('debug');
-});
+    'domain'=>'dev.' . env('APP_URL'),
+    'as'=>'dev',
+  ], function(){
+    Route::get('debug', function () {
+      return view('dev/debug');
+    })->name('debug');
+  }
+);
+
+/**
+ * Subdomain: www
+ * Name: www.
+ */
+Route::group([
+    'domain'=>'www.' . env('APP_URL'),
+    'as'=>'www'
+  ], function(){
+    Route::get('/', function () {
+      return view('welcome');
+    })->name('welcome');
+  }
+);
